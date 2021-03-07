@@ -1,7 +1,6 @@
 package tn.esprit.spring.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.*;
 @Entity
@@ -11,6 +10,9 @@ public class Question  implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id8 ;
+	private long id_question ;
 
+	
+	@ManyToOne 
+	Client clientQuest;
 }
