@@ -23,22 +23,13 @@ public class Notification  implements Serializable {
 	@Column(name="message")
 	private String message ;
 	
-	public Notification (long id_notification, TypeNotification type_notification, Date send_date,String message ) {
-		super();
-		this.id_notification = id_notification;
-		this.type_notification = type_notification;
-		this.send_date = send_date;
-		this.message = message;
-		
-	}
-	public Notification ( TypeNotification type_notification, Date send_date,String message ) {
-		super();
-		this.type_notification = type_notification;
-		this.send_date = send_date;
-		this.message = message;
-		
-	}
+	@ManyToOne 
+	Client clientNotif;
 	
+	
+	public Notification() {
+		super();
+	}
 	
 	public long getId_notification() {
 		return id_notification;
@@ -68,15 +59,23 @@ public class Notification  implements Serializable {
 	public void setDesc_message(String desc_message) {
 		this.message = desc_message;
 	}
-/*	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((date_message == null) ? 0 : date_message.hashCode());
-		result = prime * result + ((desc_message == null) ? 0 : desc_message.hashCode());
-		result = prime * result + (int) (id_message ^ (id_message >>> 32));
-		return result;
-	}*/
+
+	public Client getClientNotif() {
+		return clientNotif;
+	}
+
+	public void setClientNotif(Client clientNotif) {
+		this.clientNotif = clientNotif;
+	}
+
+	public void setId_notification(long id_notification) {
+		this.id_notification = id_notification;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -107,6 +106,9 @@ public class Notification  implements Serializable {
 		return "Notification [id_notification=" + id_notification + ", type_notification=" + type_notification + ", message=" + message + ", send_date=" + send_date
 				+ "]";
 	}
+
+
+	
 	
 	
 }
