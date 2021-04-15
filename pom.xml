@@ -1,54 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.1.8.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>tn.esprit.spring</groupId>
-	<artifactId>PIdev4</artifactId>
-	<version>1.0</version>
-	<name>PIdev4</name>
-	<description>spring-boot-data-jpa-entityy</description>
+	<groupId>com.bezkoder</groupId>
+	<artifactId>spring-boot-security-jwt</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>spring-boot-security-jwt</name>
+	<description>Demo project for Spring Boot Security - JWT</description>
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+
 	<dependencies>
+	
+	<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-collections4</artifactId>
+  <version>4.1</version>
+</dependency>
+	<dependency>
+  <groupId>org.awaitility</groupId>
+  <artifactId>awaitility</artifactId>
+  <version>3.1.2</version>
+  <scope>test</scope>
+</dependency>
+	
+	<dependency>
+    <groupId>com.opencsv</groupId>
+    <artifactId>opencsv</artifactId>
+    <version>4.5</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-csv</artifactId>
+	<version>1.8</version>
+</dependency>
+	
+	<dependency>
+	<groupId>org.apache.poi</groupId>
+	<artifactId>poi-ooxml</artifactId>
+	<version>4.1.2</version>
+</dependency>
+	
+	
+	
+	
+	<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<dependency>
+    <groupId>com.twilio.sdk</groupId>
+    <artifactId>twilio</artifactId>
+    <version>7.1.0</version>
+</dependency>
+	
+	
+	
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+	
+	
+	
+	
+	
+	<dependency>
+    <groupId>com.github.librepdf</groupId>
+    <artifactId>openpdf</artifactId>
+    <version>1.3.8</version>
+</dependency>
+	<dependency>
+
+<groupId>javax.mail</groupId>
+
+<artifactId>mail</artifactId>
+
+<version>1.4</version>
+
+</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+   <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -58,14 +149,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
