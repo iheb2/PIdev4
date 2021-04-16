@@ -1,5 +1,5 @@
 package tn.esprit.spring.model;
 
-public enum TypeT {
-Debit,Credit
+public enum StateT {
+oui , non 
 }

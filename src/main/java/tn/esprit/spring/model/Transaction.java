@@ -14,18 +14,88 @@ public class Transaction implements Serializable {
 	private double amount;
 	@Column(name="Date_transaction")
 	@Temporal (TemporalType.DATE)
-	private Date DateT;
+	private Date DateT= new Date();
+	@Column(name="Date_p")
+	@Temporal (TemporalType.DATE)
+	private Date DateP;
 	@Column(name="Type_Transaction")
 	@Enumerated(EnumType.STRING)
 	private TypeT type;
+	@Column(name="mode")
+	@Enumerated(EnumType.STRING)
+	private mode mode;
+	@Column(name="retard")
+	private Long retard;
+	@Column(name="nb_pay")
+	private int nb;
+	@Column(name="State")
+	@Enumerated(EnumType.STRING)
+	private StateT State;
+	@Column(name="montant_paye")
+	private double total;
+	@Column(name="penalite")
+	private double penalite;
+	@Column(name="montant_compte")
+	private double argent;
+	
 	@ManyToOne
-	Account account;
+	AmalWacelGhada ac;
 	
-	
-
-	public Transaction() {
-		super();
+	public double getTotal() {
+		return total;
 	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public double getPenalite() {
+		return penalite;
+	}
+	public void setPenalite(double penalite) {
+		this.penalite = penalite;
+	}
+	public double getArgent() {
+		return argent;
+	}
+	public void setArgent(double argent) {
+		this.argent = argent;
+	}
+	public StateT getState() {
+		return State;
+	}
+	public void setState(StateT state) {
+		State = state;
+	}
+	public Date getDateP() {
+		return DateP;
+	}
+	public void setDateP(Date dateP) {
+		DateP = dateP;
+	}
+	public mode getMode() {
+		return mode;
+	}
+	public void setMode(mode mode) {
+		this.mode = mode;
+	}
+	public Long getRetard() {
+		return retard;
+	}
+	public void setRetard(Long retard) {
+		this.retard = retard;
+	}
+	public int getNb() {
+		return nb;
+	}
+	public void setNb(int nb) {
+		this.nb = nb;
+	}
+	public AmalWacelGhada getAc() {
+		return ac;
+	}
+	public void setAc(AmalWacelGhada ac) {
+		this.ac = ac;
+	}
+	
 	public Long getId_t() {
 		return id_t;
 	}
@@ -47,23 +117,35 @@ public class Transaction implements Serializable {
 	public TypeT getType() {
 		return type;
 	}
+
 	public void setType(TypeT type) {
 		this.type = type;
-	}
-	public Account getAccount() {
-		return account;
-	}
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	@Override
-	public String toString() {
-		return "Transaction [id_t=" + id_t + ", amount=" + amount + ", DateT=" + DateT + ", type=" + type + ", account="
-				+ account + "]";
+	public Transaction(Long id_t, double amount, Date dateT, Date dateP, TypeT type, tn.esprit.spring.model.mode mode,
+			Long retard, int nb, StateT state, float total, float penalite, float argent, AmalWacelGhada ac) {
+		super();
+		this.id_t = id_t;
+		this.amount = amount;
+		DateT = dateT;
+		DateP = dateP;
+		this.type = type;
+		this.mode = mode;
+		this.retard = retard;
+		this.nb = nb;
+		State = state;
+		this.total = total;
+		this.penalite = penalite;
+		this.argent = argent;
+		this.ac = ac;
 	}
+	public Transaction() {
+		super();
+	}
+
+
 	
 }
