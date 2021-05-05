@@ -18,25 +18,16 @@ public class Client  implements Serializable 	{
 	@Column(name="cin")
 	private String cin;
 	
-	@Column(name="email")
-	private String email;
 	
 	@Column(name="adress")
 	private String adress;
 	
-	@Column(name="first_name")
-	private String first_name;
-	
-	@Column(name="last_name")
-	private String last_name;
+
 
 	@Temporal (TemporalType.DATE)
 	private Date date_of_birth ;
 	
-	@Column(name="password_client")
-	private String password_client ;
 
-	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="clientQuest")
 	private Set<Question> question;
@@ -63,14 +54,7 @@ public class Client  implements Serializable 	{
 		this.cin = cin;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	
 	public String getAdress() {
 		return adress;
 	}
@@ -79,14 +63,7 @@ public class Client  implements Serializable 	{
 		this.adress = adress;
 	}
 
-	public String getFirst_name() {
-		return first_name;
-	}
-
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-
+	
 	public Date getDate_of_birth() {
 		return date_of_birth;
 	}
@@ -95,13 +72,6 @@ public class Client  implements Serializable 	{
 		this.date_of_birth = date_of_birth;
 	}
 
-	public String getPassword_client() {
-		return password_client;
-	}
-
-	public void setPassword_client(String password_client) {
-		this.password_client = password_client;
-	}
 
 
 
@@ -124,13 +94,7 @@ public class Client  implements Serializable 	{
 		return super.toString();
 	}
 
-	public String getLast_name() {
-		return last_name;
-	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
 
 	public Set<Question> getQuestion() {
 		return question;
