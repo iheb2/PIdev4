@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="metadata">
+        <ui:param name="title" value="Car listing"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="description">
+        Find cars by name, price and model
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <div class="box box-primary">
+                 <p:dataTable widgetVar="carsTable" var="c" value="#{sessionMB.historique}" 
+   >
+
+           
+                 
+		   <p:column headerText="Type"  >
+                          #{c.type}
+                        </p:column>
+                      <p:column headerText="date de paiement prévu(pour credit)" sortBy="#{c.dateP}" >
+                          #{c.dateP}
+                        </p:column>
+                 		   <p:column headerText="date de la agency effectuer" sortBy="#{c.dateT}" >
+                          #{c.dateT}
+                        </p:column>
+                                            <p:column headerText="retard de paiement de credit" sortBy="#{c.retard}" >
+                          #{c.retard}
+                        </p:column>
+              <p:column headerText="somme prévu" sortBy="#{c.amount}" >
+                          #{c.amount}
+                        </p:column>
+                              <p:column headerText="tva" sortBy="#{c.penalite}" >
+                          #{c.penalite}
+                        </p:column>      
+                <p:column headerText="somme +tva" sortBy="#{c.total}" >
+                          #{c.total}
+                        </p:column>
+                                <p:column headerText="mode agency" sortBy="#{c.mode}" >
+                          #{c.mode}
+                        </p:column>
+                        
+                           <p:column headerText="compte" sortBy="#{c.argent}" >
+                          #{c.argent}
+                        </p:column>
+                           <p:column headerText="id compte" sortBy="#{c.ac.id}" >
+                          #{c.ac.id}
+                        </p:column>
+                    </p:dataTable>
+            </div>
+           
+        </h:form>
+
+
+
+      
+    </ui:define>
+
+</ui:composition>

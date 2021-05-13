@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="title">
+   Withdraw Credit
+    </ui:define>
+
+    <ui:define name="body">
+        <f:metadata>
+            <f:viewParam name="amount" value="#{requestcreditFormMB.amount}" converter="javax.faces.Long"/>
+            <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{requestcreditFormMB.init()}"/>-->
+            <f:event type="preRenderView" listener="#{requestcreditFormMB.init}"/>
+        </f:metadata>
+
+        
+        <h:form id="form" prependId="false">
+    
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="Amount To Withdraw" for="inptName"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                            <p:inputText id="inptName" value="#{requestcreditFormMB.amount}"/>
+                        </div>
+                   
+      
+            <h:commandButton id="btn" value="Confirm"
+					action="#{requestcreditFormMB.direct()}" />
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

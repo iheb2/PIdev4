@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="title">
+   Simulate Credit: Monthly Payment
+    </ui:define>
+
+    <ui:define name="body">
+        <f:metadata>
+            <f:viewParam name="amount" value="#{requestCreditFormMB.amount}" converter="javax.faces.Long"/>
+            <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{requestCreditFormMB.init()}"/>-->
+            <f:event type="preRenderView" listener="#{requestCreditFormMB.init}"/>
+        </f:metadata>
+
+        
+        <h:form id="form" prependId="false">
+    
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="Amount To Simulate" for="inptName"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                            <p:inputText id="inptName" value="#{requestCreditFormMB.amount}"/>
+                        </div>
+                   
+      
+            <h:commandButton id="btn" value="Confirm"
+					action="#{requestCreditFormMB.direct()}" />
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
