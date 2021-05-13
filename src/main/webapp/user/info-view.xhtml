@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="metadata">
+        <ui:param name="title" value="Car listing"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="description">
+        Find cars by name, price and model
+    </ui:define>
+						
+    <ui:define name="body">
+        <div class="card product">
+    <h:form id="form">
+        <p:dataView var="product" value="#{infoListMB.infosss}" rows="12" paginator="true"
+                    rowsPerPageTemplate="6,12,16"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+           
+            <p:dataViewListItem>
+                <div class="product-list-item">
+                    
+                    <div class="product-list-detail">
+                        <div class="product-name">#{product.question}</div>
+                        <div class="product-description">#{product.answer}</div>
+                        <p:rating id="rating-methods" value="#{product.rate}"/>
+                    
+                    </div>
+                   
+                </div>
+            </p:dataViewListItem>
+        </p:dataView>
+    </h:form>
+</div>
+
+    </ui:define>
+
+</ui:composition>

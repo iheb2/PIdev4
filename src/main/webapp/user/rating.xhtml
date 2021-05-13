@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="title">
+       view  and rate information #{infoFormMB.car.id}
+    </ui:define>
+
+    <ui:define name="body">
+        <f:metadata>
+            <f:viewParam name="id" value="#{infoFormMB.id}" converter="javax.faces.Long"/>
+            <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{infoFormMB.init()}"/>-->
+            <f:event type="preRenderView" listener="#{infoFormMB.init}"/>
+        </f:metadata>
+
+        <adm:breadcrumb title="#{empty infoFormMB.id ? 'New Car' : 'Car '.concat(infoFormMB.id)}" link="info-form.jsf?id=#{infoFormMB.id}"/>
+        <h:form id="form" prependId="false">
+            <p:focus rendered="#{empty infoFormMB.id}"/>
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton value="rate" action="#{infoFormMB.rating}" update="@form"
+                                         icon="fa fa-star" styleClass="btn-primary"/>
+                        <p:spacer width="5" rendered="#{infoFormMB.isNew()}"/>
+                        <p:commandButton value="Clear" action="#{infoFormMB.clear}" process="@this"
+                                         icon="fa fa-refresh" styleClass="btn-success"
+                                         update="@form" rendered="#{infoFormMB.isNew()}" resetValues="true"/>
+                        <p:spacer width="5" rendered="#{not infoFormMB.isNew()}"/>
+
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Back" immediate="true"
+                                         action="info-list2?faces-redirect=true"
+                                         process="@this"
+                                         icon="fa fa-reply"/>
+                    </div>
+                    <p:splitButton value="Save" action="#{infoFormMB.save}" update="@form"
+                                   icon="fa fa-check"
+                                   styleClass="hidden-md hidden-lg btn-primary">
+                        <p:menuitem value="Reset" action="#{infoFormMB.clear}"
+                                    process="@this" update="@form" rendered="#{infoFormMB.isNew()}"
+                                    resetValues="true" icon="fa fa-refresh"/>
+                        <p:menuitem value="Delete" action="#{infoFormMB.remove}" process="@this"
+                                    rendered="#{not infoFormMB.isNew()}" icon="fa fa-trash"
+                                 >
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
+                        </p:menuitem>
+                        <p:separator/>
+                        <p:menuitem value="Back" action="info-list?faces-redirect=true"
+                                    process="@this" immediate="true"
+                                    icon="fa fa-reply"/>
+                    </p:splitButton>
+
+                    <p:separator/>
+
+                    <div class="ui-g ui-fluid">
+               
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="Question" for="inptModel"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                            <p:outputLabel id="inptModel" value="#{infoFormMB.car.question}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="Answer:" for="inptName"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                            <p:outputLabel id="inptName" value="#{infoFormMB.car.answer}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="your rate" for="inptPrice"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                            <p:inputNumber id="inptPrice" value="#{infoFormMB.car.rate}"/>
+                       
+                        </div>
+                        
+                              <div >
+                            <p:outputLabel value="rate final:" for="inptPrice"/>
+                              <p:rating value="#{infoFormMB.car.rate}" disabled="true"/>
+                        </div>
+                           
+                    </div>
+                </div>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
+                <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+                <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                 icon="fa fa-close"/>
+            </p:confirmDialog>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
