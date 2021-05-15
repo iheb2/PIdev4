@@ -1,6 +1,7 @@
 package com.github.adminfaces.starter.bean;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.github.adminfaces.starter.infra.model.Filter;
 
 
@@ -14,6 +15,12 @@ import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.axes.cartesian.CartesianScales;
+import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearAxes;
+import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearTicks;
+import org.primefaces.model.charts.bar.BarChartOptions;
+import org.primefaces.model.charts.hbar.HorizontalBarChartDataSet;
+import org.primefaces.model.charts.hbar.HorizontalBarChartModel;
 import org.primefaces.model.charts.optionconfig.title.Title;
 import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartOptions;
@@ -30,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 import static com.github.adminfaces.starter.util.Utils.addDetailMessage;
 
 /**
@@ -41,7 +50,7 @@ public class RequestListMB implements Serializable {
 
     @Inject
     RequestService requestService;
-    IRequestService requestC;
+    IRequestService ir;
     Request req;
 
     Long id;
@@ -152,147 +161,155 @@ public class RequestListMB implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-	private PieChartModel pieModel;
-    
-    public PieChartModel getPieModel() {
-		return pieModel;
+    	 
+	private HorizontalBarChartModel hbarModel=new HorizontalBarChartModel();
+
+
+	public HorizontalBarChartModel getHbarModel() {
+		return hbarModel;
 	}
 
-	public void setPieModel(PieChartModel pieModel) {
-		this.pieModel = pieModel;
+	public void setHbarModel(HorizontalBarChartModel hbarModel) {
+		this.hbarModel = hbarModel;
 	}
 
+	public HorizontalBarChartModel createHorizontalBarModel() {
+        //int currentYear=2021;  
+        //System.out.println("Current year is : "+currentYear);  
+    	
+        /*Map<Double, Double> MA = new HashMap<Double, Double>(); 
+    	MA =ir.StatisticCreatedPerMonth(currentYear); 
+	    ChartData data = new ChartData();
 
-	 
-	public PieChartModel createPieModel(float projectcost) {
-	        pieModel = new PieChartModel();
-	          
-	    	
-	        Map<Double, Double> MA = new HashMap<Double, Double>(); 
-	    	MA =requestC.StatisticCreatedPerMonth(2021); 
-		    ChartData data = new ChartData();
+        HorizontalBarChartDataSet hbarDataSet = new HorizontalBarChartDataSet();
+        List<Number> values = new ArrayList<>();
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+        values.add(1);
+      
+       /* for (Map.Entry mapentry : MA.entrySet()) {
+           
+        	if((double)mapentry.getKey()==1) {
+        		values.remove(0);
+        		values.add(0, (Number)mapentry.getValue());
+        		
+        	}
+        	else if((double)mapentry.getKey()==2) {
+        		values.remove(1);
+        		values.add(1, (Number)mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==3) {
+        		values.remove(2);
+        		values.add(2, (Number)mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==4) {
+        		values.remove(3);
+        		values.add(3, (Number)mapentry.getValue());
+        		}
+        	else if((double)mapentry.getKey()==5) {
+        		values.remove(4);
+        		values.add(4, (Number)mapentry.getValue());
+        	//	values.add((Number) mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==6) {
+        		values.remove(5);
+        		values.add(5, (Number)mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==7) {
+        		values.remove(6);
+        		values.add(6, (Number)mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==8) {
+        		values.remove(7);
+        		values.add(7, (Number)mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==9) {
+        		values.remove(8);
+        		values.add(8, (Number)mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==10) {
+        		values.remove(9);
+        		values.add(9, (Number)mapentry.getValue());
+        	}
+        	else if((double)mapentry.getKey()==11) {
+        		values.remove(10);
+        		values.add(10, (Number)mapentry.getValue());
+        		}
+        	else if((double)mapentry.getKey()==12) {
+        		values.remove(11);
+        		values.add(11, (Number)mapentry.getValue());
+        	}
+        	
+         }
 
-	        PieChartDataSet dataSet = new PieChartDataSet();
-	        List<Number> values = new ArrayList<>();
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	        values.add(1);
-	      
-	        for (Map.Entry mapentry : MA.entrySet()) {
-	           /* System.out.println("clÃ©: "+mapentry.getKey() 
-	                               + " | valeur: " + mapentry.getValue());*/
-	        	
-	        	if((double)mapentry.getKey()==1) {
-	        		values.remove(0);
-	        		values.add(0, (Number)mapentry.getValue());
-	        		
-	        	}
-	        	else if((double)mapentry.getKey()==2) {
-	        		values.remove(1);
-	        		values.add(1, (Number)mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==3) {
-	        		values.remove(2);
-	        		values.add(2, (Number)mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==4) {
-	        		values.remove(3);
-	        		values.add(3, (Number)mapentry.getValue());
-	        		}
-	        	else if((double)mapentry.getKey()==5) {
-	        		values.remove(4);
-	        		values.add(4, (Number)mapentry.getValue());
-	        	//	values.add((Number) mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==6) {
-	        		values.remove(5);
-	        		values.add(5, (Number)mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==7) {
-	        		values.remove(6);
-	        		values.add(6, (Number)mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==8) {
-	        		values.remove(7);
-	        		values.add(7, (Number)mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==9) {
-	        		values.remove(8);
-	        		values.add(8, (Number)mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==10) {
-	        		values.remove(9);
-	        		values.add(9, (Number)mapentry.getValue());
-	        	}
-	        	else if((double)mapentry.getKey()==11) {
-	        		values.remove(10);
-	        		values.add(10, (Number)mapentry.getValue());
-	        		}
-	        	else if((double)mapentry.getKey()==12) {
-	        		values.remove(11);
-	        		values.add(11, (Number)mapentry.getValue());
-	        	}
-	        	
-	         }
- 
-	       
+        
+        hbarDataSet.setData(values);
 
-	        List<String> bgColor = new ArrayList<>();
-	        bgColor.add("rgba(255, 99, 132, 0.2)");
-	        bgColor.add("rgba(255, 159, 64, 0.2)");
-	        bgColor.add("rgba(255, 205, 86, 0.2)");
-	        bgColor.add("rgba(75, 192, 192, 0.2)");
-	        bgColor.add("rgba(54, 162, 235, 0.2)");
-	        bgColor.add("rgba(153, 102, 255, 0.2)");
-	        bgColor.add("rgba(201, 203, 207, 0.2)");
+        List<String> bgColor = new ArrayList<>();
+        bgColor.add("rgba(255, 99, 132, 0.2)");
+        bgColor.add("rgba(255, 159, 64, 0.2)");
+        bgColor.add("rgba(255, 205, 86, 0.2)");
+        bgColor.add("rgba(75, 192, 192, 0.2)");
+        bgColor.add("rgba(54, 162, 235, 0.2)");
+        bgColor.add("rgba(153, 102, 255, 0.2)");
+        bgColor.add("rgba(201, 203, 207, 0.2)");
+        hbarDataSet.setBackgroundColor(bgColor);
 
-	        List<String> borderColor = new ArrayList<>();
-	        borderColor.add("rgb(255, 99, 132)");
-	        borderColor.add("rgb(255, 159, 64)");
-	        borderColor.add("rgb(255, 205, 86)");
-	        borderColor.add("rgb(75, 192, 192)");
-	        borderColor.add("rgb(54, 162, 235)");
-	        borderColor.add("rgb(153, 102, 255)");
-	        borderColor.add("rgb(201, 203, 207)");
+        List<String> borderColor = new ArrayList<>();
+        borderColor.add("rgb(255, 99, 132)");
+        borderColor.add("rgb(255, 159, 64)");
+        borderColor.add("rgb(255, 205, 86)");
+        borderColor.add("rgb(75, 192, 192)");
+        borderColor.add("rgb(54, 162, 235)");
+        borderColor.add("rgb(153, 102, 255)");
+        borderColor.add("rgb(201, 203, 207)");
+        hbarDataSet.setBorderColor(borderColor);
+        hbarDataSet.setBorderWidth(1);
 
-	        data.addChartDataSet(dataSet);
+        data.addChartDataSet(hbarDataSet);
 
-	        List<String> labels = new ArrayList<>();
-	        labels.add("January");
-	        labels.add("February");
-	        labels.add("March");
-	        labels.add("April");
-	        labels.add("May");
-	        labels.add("June");
-	        labels.add("July");
-	        labels.add("August");
-	        labels.add("September");
-	        labels.add("October");
-	        labels.add("November");
-	        labels.add("December");
-	        data.setLabels(labels);
-	        
-	        //Options
-	        PieChartOptions options = new PieChartOptions();
-	        
+        List<String> labels = new ArrayList<>();
+        labels.add("January");
+        labels.add("February");
+        labels.add("March");
+        labels.add("April");
+        labels.add("May");
+        labels.add("June");
+        labels.add("July");
+        labels.add("August");
+        labels.add("September");
+        labels.add("October");
+        labels.add("November");
+        labels.add("December");
+        data.setLabels(labels);
+        hbarModel.setData(data);
+        
+        //Options
+        /*BarChartOptions options = new BarChartOptions();
+        CartesianScales cScales = new CartesianScales();
+        CartesianLinearAxes linearAxes = new CartesianLinearAxes();
+        linearAxes.setOffset(true);
+        CartesianLinearTicks ticks = new CartesianLinearTicks();
+        ticks.setBeginAtZero(true);
+        linearAxes.setTicks(ticks);
+        cScales.addXAxesData(linearAxes);
+        options.setScales(cScales);
 
-	        Title title = new Title();
-	        title.setDisplay(true);
-	        title.setText("Statistic created Requests by month for this year ");
-	        options.setTitle(title);
+        Title title = new Title();
+        title.setDisplay(true);
+        title.setText("Statistic amount by month for current year "+ currentYear);
+        options.setTitle(title);
 
-	        pieModel.setData((Map<String, Number>) data);
-	        
-	        return pieModel;
-	    }
+        hbarModel.setOptions(options);*/
+        return hbarModel;
+	}
 }

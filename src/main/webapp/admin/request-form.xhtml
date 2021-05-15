@@ -87,6 +87,14 @@ Request a effectuer    </ui:define>
                         <div class="ui-sm-12 ui-md-4 ui-lg-5" >
                             <p:inputNumber id="inptStatus" value="#{requestFormMB.car.status}"/>
                         </div>
+                        
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="Exp_date" for="inptExp_date"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                        <p:calendar id="inptExp_date" beforeShowDay="false" pattern="dd/MM/yyyy" effect="drop" showButtonPanel="true" navigator="true" locale="pt" mindate="#{systemC.today}" value="#{requestFormMB.car.exp_date}"> 
+					    </p:calendar>
+                        </div>
                     </div>
                 </div>
             </div>

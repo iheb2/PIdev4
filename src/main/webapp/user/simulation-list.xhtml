@@ -6,7 +6,7 @@
                 template="#{layoutMB.template}">
 
     <ui:define name="metadata">
-        <ui:param name="title" value="Mensualité"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <ui:param name="title" value="Simulation Credit"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
                 text-align: right !important;
@@ -15,8 +15,9 @@
         </style>
     </ui:define>
 
+
     <ui:define name="description">
-        simulation mensualité
+        Simulation Credit
     </ui:define>
 
     <ui:define name="body">
@@ -24,10 +25,24 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <!--<p:commandButton action="request-credit-form?faces-redirect=true" icon="fa fa-plus"-->
+                                         <!--value="New" styleClass="btn-primary"/>-->
+                        <!--<p:spacer width="5"/>-->
+                       
+					        
                         <p:commandButton action="simulation-form?faces-redirect=true" icon="fa fa-plus"
-                                         value="Simulate" styleClass="btn-primary"/>
+                                         value="New Simulation" styleClass="btn-primary"/>
                         <p:spacer width="5"/>
-                        
+                        <p:commandButton action="calculator?faces-redirect=true" icon="fa fa-calculator"
+                                         value="Calculator" styleClass="btn-warning"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Delete Selected" icon="fa fa-trash" styleClass="btn-danger"
+                                         action="#{requestCreditListMB.delete}"
+                                         disabled="#{empty requestCreditListMB.selectedCars or requestCreditListMB.selectedCars.size() == 0}"
+                                         process="@this" update="@form"
+                        >
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
+                        </p:commandButton>
                         <p:spacer width="5"/>
                         <p:commandButton value="View selected" update="@(.ui-dialog)" styleClass="btn-info"
                                          disabled="#{empty requestCreditListMB.selectedCars or requestCreditListMB.selectedCars.size() == 0}"
@@ -50,6 +65,7 @@
                         />
                     </p:splitButton>
 
+					
                     <p:separator/>
                     <p:dataTable widgetVar="carsTable" var="c" value="#{requestCreditListMB.cars}" rows="5"
                                  rowKey="#{c.id_request}" lazy="true" paginator="true"
@@ -66,6 +82,19 @@
                         <p:ajax event="rowUnselect" update="@(.ui-button, .ui-confirm-dialog)"/>
 
 
+                        <f:facet name="header">
+                            Find Request by id: <p:inputNumber id="inptId" decimalPlaces="0" value="#{requestCreditListMB.id}"/>
+                            <p:spacer height="5"/>
+                            <p:commandButton id="brFind"
+                                             value="Find"
+                                             action="#{requestCreditListMB.findCarById(requestCreditListMB.id)}"
+                                             process="@form"
+                                             update="@form"
+                                             styleClass="btn-flat bg-black btn-states"
+                                             partialSubmit="true"/>
+                        </f:facet>
+                        <p:column selectionMode="multiple" width="5%" styleClass="align-center"/>
+
                         
                         
                         
@@ -76,13 +105,13 @@
                           #{c.months}
                         </p:column>
                         <p:column headerText="Total" sortBy="#{c.total}" >
-                          #{c.total}
+                          #{c.months*((c.amount*0.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211)/(1.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211-1))}
                         </p:column>
-                        <p:column headerText="Interests Amount" sortBy="#{c.interest}" >
-                          #{c.interest}
+                        <p:column headerText="Interest" sortBy="#{c.interest}" >
+                          #{c.months*((c.amount*0.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211)/(1.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211-1))-c.amount}
                         </p:column>
                         <p:column headerText="Monthly Payment" sortBy="#{c.monthly_payment}" >
-                          #{c.monthly_payment}
+                          #{(c.amount*0.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211)/(1.00407412378364830160541960267211*1.00407412378364830160541960267211*1.00407412378364830160541960267211-1)}
                         </p:column>
                     </p:dataTable>
                 </div>
@@ -95,13 +124,13 @@
             </p:confirmDialog>
         </h:form>
 
-
+		
 
         <p:dialog header="Selected cars" widgetVar="selectedCars" height="250"
                   width="400" responsive="true" styleClass="box-success">
             <p:dataList id="selectedCarsList" value="#{requestCreditListMB.selectedCars}" var="car"
                         type="definition">
-                la mensualité: #{car.monthly_payment}  et montant des intêrets est : #{car.interest}
+                la transactin d'id: #{car.id_request}  est de type: #{car.type} . Son etat est: #{car.status}
             </p:dataList>
         </p:dialog>
 

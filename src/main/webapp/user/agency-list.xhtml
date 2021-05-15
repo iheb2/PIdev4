@@ -6,7 +6,7 @@
                 template="#{layoutMB.template}">
 
     <ui:define name="metadata">
-        <ui:param name="title" value="Transaction listing"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <ui:param name="title" value="Agency List"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
                 text-align: right !important;
@@ -16,7 +16,7 @@
     </ui:define>
 
     <ui:define name="description">
-        ceci est l' historique des transaction de la banque
+        Agency List
     </ui:define>
 
     <ui:define name="body">
@@ -26,6 +26,10 @@
                     <div id="main-buttons" class="hidden-sm hidden-xs">
                         
                         <p:spacer width="5"/>
+                        <p:commandButton value="PDF">
+											<p:dataExporter type="pdf" target="agency"
+												fileName="agency" />
+										</p:commandButton>
                         <p:commandButton value="View selected" update="@(.ui-dialog)" styleClass="btn-info"
                                          disabled="#{empty agencyListMB.selectedCars or agencyListMB.selectedCars.size() == 0}"
                                          oncomplete="PF('selectedCars').show()" icon="fa fa-search"/>
@@ -76,27 +80,12 @@
                         </f:facet>
                         <p:column selectionMode="multiple" width="5%" styleClass="align-center"/>
 
-                        <p:column headerText="Email" filterBy="#{c.email}" sortBy="#{c.email}"
-                                  filterMatchMode="contains">
-                            <f:facet name="filter">
-                                <p:autoComplete value="#{agencyListMB.filter.entity.email}" forceSelection="true"
-                                                minQueryLength="2" queryDelay="500"
-                                                completeMethod="#{agencyListMB.completeModel}" maxResults="10">
-                                    <p:ajax event="itemSelect" process="@this" update="@none"
-                                            oncomplete="PF('carsTable').filter()"/>
-                                </p:autoComplete>
-                            </f:facet>
-                             <p:link value="#{c.email}" outcome="credit.xhtml" >
-                                <f:param name="id" value="#{c.id_agency}"/>
-                            </p:link>
-
+                        
+                        
+                        <p:column headerText="Email" sortBy="#{c.email}" >
+                            #{c.email}
                         </p:column>
-                        <p:column headerText="Country" sortBy="#{c.country}" filterBy="#{c.country}">
-                            <f:facet name="filter">
-                                <p:inputText value="#{agencyListMB.filter.entity.country}">
-                                    <p:ajax process="@this" update="@none" oncomplete="PF('carsTable').filter()"/>
-                                </p:inputText>
-                            </f:facet>
+                        <p:column headerText="Country" sortBy="#{c.country}" >
                             #{c.country}
                         </p:column>
                         <p:column headerText="City" sortBy="#{c.city}" >

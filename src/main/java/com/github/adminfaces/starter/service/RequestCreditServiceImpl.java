@@ -43,6 +43,30 @@ public class RequestCreditServiceImpl implements IRequestCreditService{
 	public Optional<RequestCredit> retrieveRequestCredit(Long id_request) {
 		return requestrepo.findById(id_request);
 	}
+	
+	@Override
+	public void voidmensualiteMicroCredit(RequestCredit request, double montant, double mois) {		
+		
+		double mensualite = calculMensualite(montant, mois);
+		double total = calculTotal(mensualite, mois);
+		double interet = calculInteret(montant, total);
+		
+		//Update de la Base de Données
+		
+		request.setAmount(montant);
+		
+		request.setMonths(mois);
+		
+		request.setTotal(total);
+		
+		request.setInterest(interet);
+		
+		request.setMonthly_payment(mensualite);
+		
+		requestrepo.save(request);
+		
+		
+	}
 
 	@Override
 	public String mensualiteMicroCredit(RequestCredit request, double montant, double mois) {		

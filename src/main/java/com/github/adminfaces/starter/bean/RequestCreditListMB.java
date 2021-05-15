@@ -30,6 +30,34 @@ public class RequestCreditListMB implements Serializable {
     RequestCreditService requestService;
 
     Long id;
+    double amount;
+    double months;
+    
+    public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public double getMonths() {
+		return months;
+	}
+
+	public void setMonths(double months) {
+		this.months = months;}
+	
+	double monthly_payment;
+    
+    public double getMonthly_payment() {
+		return monthly_payment;
+	}
+
+	public void setMonthly_payment(double monthly_payment) {
+		this.monthly_payment = monthly_payment;
+	}
+	
 
     LazyDataModel<RequestCredit> cars;
 
@@ -137,4 +165,6 @@ public class RequestCreditListMB implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }

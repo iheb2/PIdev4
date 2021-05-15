@@ -6,7 +6,7 @@
                 template="#{layoutMB.template}">
 
     <ui:define name="metadata">
-        <ui:param name="title" value="Request listing"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <ui:param name="title" value="Request Credit List"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
                 text-align: right !important;
@@ -16,7 +16,7 @@
     </ui:define>
 
     <ui:define name="description">
-        ceci est l' historique des request de la banque
+        Request Credit List
     </ui:define>
 
     <ui:define name="body">
@@ -24,43 +24,43 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <div id="main-buttons" class="hidden-sm hidden-xs">
-                        <p:commandButton action="request-credit-form?faces-redirect=true" icon="fa fa-plus"
-                                         value="New" styleClass="btn-primary"/>
-                        <p:spacer width="5"/>
+                        <!--<p:commandButton action="request-credit-form?faces-redirect=true" icon="fa fa-plus"-->
+                                         <!--value="New" styleClass="btn-primary"/>-->
+                        <!--<p:spacer width="5"/>-->
                         <p:commandButton value="Delete Selected" icon="fa fa-trash" styleClass="btn-danger"
-                                         action="#{requestListMB.delete}"
-                                         disabled="#{empty requestListMB.selectedCars or requestListMB.selectedCars.size() == 0}"
+                                         action="#{requestCreditListMB.delete}"
+                                         disabled="#{empty requestCreditListMB.selectedCars or requestCreditListMB.selectedCars.size() == 0}"
                                          process="@this" update="@form"
                         >
                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
                         </p:commandButton>
                         <p:spacer width="5"/>
                         <p:commandButton value="View selected" update="@(.ui-dialog)" styleClass="btn-info"
-                                         disabled="#{empty requestListMB.selectedCars or requestListMB.selectedCars.size() == 0}"
+                                         disabled="#{empty requestCreditListMB.selectedCars or requestCreditListMB.selectedCars.size() == 0}"
                                          oncomplete="PF('selectedCars').show()" icon="fa fa-search"/>
                     </div>
 
                     <p:splitButton value="retrait" action="retrait?faces-redirect=true"
                                    icon="fa fa-plus"
                                    styleClass="hidden-md hidden-lg btn-primary">
-                        <p:menuitem value="Delete Selected" action="#{requestListMB.delete}"
+                        <p:menuitem value="Delete Selected" action="#{requestCreditListMB.delete}"
                                     process="@this" update="@form"
-                                    disabled="#{empty requestListMB.selectedCars or requestListMB.selectedCars.size() == 0}"
+                                    disabled="#{empty requestCreditListMB.selectedCars or requestCreditListMB.selectedCars.size() == 0}"
                                     icon="fa fa-trash">
                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
                         </p:menuitem>
                         <p:menuitem value="View selected" update="@(.ui-dialog)"
                                     oncomplete="PF('selectedCars').show()"
-                                    disabled="#{empty requestListMB.selectedCars or requestListMB.selectedCars.size() == 0}"
+                                    disabled="#{empty requestCreditListMB.selectedCars or requestCreditListMB.selectedCars.size() == 0}"
                                     icon="fa fa-search"
                         />
                     </p:splitButton>
 
                     <p:separator/>
-                    <p:dataTable widgetVar="carsTable" var="c" value="#{requestListMB.cars}" rows="5"
+                    <p:dataTable widgetVar="carsTable" var="c" value="#{requestCreditListMB.cars}" rows="5"
                                  rowKey="#{c.id_request}" lazy="true" paginator="true"
-                                 filteredValue="#{requestListMB.filteredValue}"
-                                 paginatorPosition="bottom" selection="#{requestListMB.selectedCars}"
+                                 filteredValue="#{requestCreditListMB.filteredValue}"
+                                 paginatorPosition="bottom" selection="#{requestCreditListMB.selectedCars}"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {JumpToPageDropdown}"
                                  currentPageReportTemplate="[ {startRecord} to {endRecord} of {totalRecords} ]"
                                  rowsPerPageTemplate="5,10,15,20,30"
@@ -73,11 +73,11 @@
 
 
                         <f:facet name="header">
-                            Find Request by id: <p:inputNumber id="inptId" decimalPlaces="0" value="#{requestListMB.id}"/>
+                            Find Request by id: <p:inputNumber id="inptId" decimalPlaces="0" value="#{requestCreditListMB.id}"/>
                             <p:spacer height="5"/>
                             <p:commandButton id="brFind"
                                              value="Find"
-                                             action="#{requestListMB.findCarById(requestListMB.id)}"
+                                             action="#{requestCreditListMB.findCarById(requestCreditListMB.id)}"
                                              process="@form"
                                              update="@form"
                                              styleClass="btn-flat bg-black btn-states"
@@ -85,35 +85,14 @@
                         </f:facet>
                         <p:column selectionMode="multiple" width="5%" styleClass="align-center"/>
 
-                        <p:column headerText="Email" filterBy="#{c.email}" sortBy="#{c.email}"
-                                  filterMatchMode="contains">
-                            <f:facet name="filter">
-                                <p:autoComplete value="#{requestListMB.filter.entity.email}" forceSelection="true"
-                                                minQueryLength="2" queryDelay="500"
-                                                completeMethod="#{requestListMB.completeModel}" maxResults="10">
-                                    <p:ajax event="itemSelect" process="@this" update="@none"
-                                            oncomplete="PF('carsTable').filter()"/>
-                                </p:autoComplete>
-                            </f:facet>
-
+                        
+                                                <p:column headerText="Amount" sortBy="#{c.amount}" >
+                          #{c.amount}
                         </p:column>
-                        <p:column headerText="Type" sortBy="#{c.type}" filterBy="#{c.type}">
-                            <f:facet name="filter">
-                                <p:inputText value="#{requestListMB.filter.entity.type}">
-                                    <p:ajax process="@this" update="@none" oncomplete="PF('carsTable').filter()"/>
-                                </p:inputText>
-                            </f:facet>
-                            #{c.type}
+                        <p:column headerText="Months" sortBy="#{c.months}" >
+                          #{c.months}
                         </p:column>
-                        <p:column headerText="Status" sortBy="#{c.status}" >
-                          #{c.status}
-                        </p:column>
-                        <p:column headerText="Created Date" sortBy="#{c.cr_date}" >
-                          #{c.cr_date}
-                        </p:column>
-                        <p:column headerText="Expiry Date" sortBy="#{c.exp_date}" >
-                          #{c.exp_date}
-                        </p:column>
+                        
                     </p:dataTable>
                 </div>
             </div>
@@ -129,7 +108,7 @@
 
         <p:dialog header="Selected cars" widgetVar="selectedCars" height="250"
                   width="400" responsive="true" styleClass="box-success">
-            <p:dataList id="selectedCarsList" value="#{requestListMB.selectedCars}" var="car"
+            <p:dataList id="selectedCarsList" value="#{requestCreditListMB.selectedCars}" var="car"
                         type="definition">
                 la transactin d'id: #{car.id_request}  est de type: #{car.type} . Son etat est: #{car.status}
             </p:dataList>

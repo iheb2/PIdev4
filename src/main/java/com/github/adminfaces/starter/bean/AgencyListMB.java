@@ -1,21 +1,30 @@
 package com.github.adminfaces.starter.bean;
 
 import com.github.adminfaces.starter.infra.model.Filter;
-
-
+import com.github.adminfaces.starter.ExportPDF.ExportPdf;
 import com.github.adminfaces.starter.model.Agency;
 import com.github.adminfaces.starter.service.AgencyService;
+import com.github.adminfaces.starter.service.IAgencyService;
 import com.github.adminfaces.template.exception.BusinessException;
 import javax.faces.view.ViewScoped;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 
 import static com.github.adminfaces.starter.util.Utils.addDetailMessage;
 
@@ -28,6 +37,7 @@ public class AgencyListMB implements Serializable {
 
     @Inject
     AgencyService carService;
+    IAgencyService agencyservice;
 
     Long id;
 
@@ -38,6 +48,9 @@ public class AgencyListMB implements Serializable {
     List<Agency> selectedCars; //cars selected in checkbox column
 
     List<Agency> filteredValue;// datatable filteredValue attribute (column filters)
+    
+    
+    
 
     @PostConstruct
     public void initDataModel() {

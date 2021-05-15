@@ -16,4 +16,5 @@ public interface IRequestCreditService {
 	Double calculMensualite(double montant, double mois);
 	Double calculTotal(double mensualite, double mois);
 	Double calculInteret(double montant, double total);
+	void voidmensualiteMicroCredit(RequestCredit request, double montant, double mois);
 }

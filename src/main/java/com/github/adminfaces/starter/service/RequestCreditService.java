@@ -8,6 +8,7 @@ import com.github.adminfaces.starter.infra.model.Filter;
 import com.github.adminfaces.starter.infra.model.SortOrder;
 import com.github.adminfaces.starter.model.RequestCredit;
 import com.github.adminfaces.starter.model.Client;
+import com.github.adminfaces.starter.model.Request;
 import com.github.adminfaces.starter.model.RequestCredit;
 import com.github.adminfaces.starter.model.RequestCredit;
 import com.github.adminfaces.starter.repository.RequestCreditRepository;
@@ -38,6 +39,8 @@ public class RequestCreditService implements Serializable {
    
 	@Autowired
 	RequestCreditRepository rep;
+	IRequestCreditService it;
+	RequestCredit req;
 
 	List<RequestCredit> allRequestCredits;
 
@@ -54,7 +57,17 @@ public class RequestCreditService implements Serializable {
     	
     }
 
-	
+	public void insert(RequestCredit request) {
+    	if (allRequestCredits.size() > 0) {
+	        request.setId_request(allRequestCredits.stream()
+	                .mapToLong(c -> c.getId_request())
+	                .max()
+	                .getAsLong()+1);
+    	}
+    	
+    	allRequestCredits.add(request);
+        rep.save(request);
+    }
 	
 	public List<RequestCredit> getAllRequestCredits() {
 		allRequestCredits = (List<RequestCredit>) rep.findAll();
@@ -125,16 +138,8 @@ public class RequestCreditService implements Serializable {
 
     
 
-    public void insert(RequestCredit requestCredit) {
-    	if (allRequestCredits.size() > 0) {
-	        requestCredit.setId_request(allRequestCredits.stream()
-	                .mapToLong(c -> c.getId_request())
-	                .max()
-	                .getAsLong()+1);
-    	}
-        allRequestCredits.add(requestCredit);
-        rep.save(requestCredit);
-    }
+
+    	
 
 
 
@@ -163,4 +168,7 @@ public class RequestCreditService implements Serializable {
         allRequestCredits.add(requestCredit);
         rep.save(requestCredit);
     }
+    
+  
+
 }
