@@ -6,7 +6,7 @@
                 template="#{layoutMB.template}">
 
     <ui:define name="metadata">
-        <ui:param name="title" value="Transaction listing"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <ui:param name="title" value="Dab List"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
                 text-align: right !important;
@@ -16,7 +16,7 @@
     </ui:define>
 
     <ui:define name="description">
-        ceci est l' historique des transaction de la banque
+        Dab List
     </ui:define>
 
     <ui:define name="body">
@@ -100,12 +100,7 @@
                         <p:column headerText="Lim Week" sortBy="#{c.lim_week}" >
                           #{c.lim_week}
                         </p:column>
-                        <p:column headerText="Agency Email" sortBy="#{c.agency.email}" >
-                          #{c.agency.email}
-                        </p:column>
-                        <p:column headerText="Agency Phone" sortBy="#{c.agency.phone}" >
-                          #{c.agency.phone}
-                        </p:column>
+                        
                     </p:dataTable>
                 </div>
             </div>

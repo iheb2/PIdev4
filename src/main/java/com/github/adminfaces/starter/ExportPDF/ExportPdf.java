@@ -1,4 +1,5 @@
 package com.github.adminfaces.starter.ExportPDF;
+
 import java.io.ByteArrayInputStream;
 
 
@@ -17,6 +18,37 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import com.github.adminfaces.starter.model.Agency;
+
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.el.ELBeanName;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+
+
+import com.github.adminfaces.starter.model.AgencyPage;
+import com.github.adminfaces.starter.model.Agencysearchcriterea;
+import com.github.adminfaces.starter.model.Review;
+import com.github.adminfaces.starter.repository.AgencyRepository;
+import com.github.adminfaces.starter.service.IAgencyService;
+
+
 public class ExportPdf {
 	public static ByteArrayInputStream AgenciesReport(List<Agency> agencies) {
 
@@ -98,5 +130,21 @@ public class ExportPdf {
 
 		return new ByteArrayInputStream(out.toByteArray());
 	}
+	
+
+
+	public ResponseEntity<InputStreamResource> employeeReports(HttpServletResponse response) throws IOException {
+
+					List<Agency> allAgencies = agencyservice.retrieveAllAgencies();
+
+					ByteArrayInputStream bis = ExportPdf.AgenciesReport(allAgencies);
+
+					HttpHeaders headers = new HttpHeaders();
+
+					headers.add("Content-Disposition", "attachment;filename=agencies.pdf");
+
+					return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+							.body(new InputStreamResource(bis));
+				   }
 
 }

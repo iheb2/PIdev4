@@ -101,10 +101,10 @@ public class RequestCreditFormMB implements Serializable {
         String msg;
         if (car.getId_request() == null) {
             carService.insert(car);
-            msg = "Car "  + " created successfully";
+            msg = "Credit "  + " finished successfully";
         } else {
             carService.update(car);
-            msg = "Car " + " updated successfully";
+            msg = "Credit " + " finished successfully";
         }
         addDetailMessage(msg);
     }
@@ -118,8 +118,7 @@ public class RequestCreditFormMB implements Serializable {
         return car == null || car.getId_request() == null;
     }
 
-    public String monthlyPaymentSim(double amount, double months) {
-		  return IService.simulationMensualite(amount, months);
-		  }
+   
+
     
 }

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+                
+      <ui:define name="title">
+Calculator    </ui:define>
+
+     <ui:define name="body">
+     
+
+        
+        
+        
+                
+        <h:form id="calculator">
+        
+        <div class="box box-primary">
+                <div class="box-header with-border">
+        
+        <div class="ui-g ui-fluid">
+                        
+        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+        <br/>
+          <p:outputLabel for="param1" value="1st Value:" />
+          </div>
+          <br/>
+          <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+          <p:inputText id="param1" value="#{calculatorBean.param1}" size="4"
+                                         styleClass="form-control" style="width: 100%"/>
+          </div>
+          <br/>
+          <div class="ui-sm-12 ui-md-2 ui-lg-1">
+          <p:outputLabel for="param2" value="2nd Value:" />
+          </div>
+          <br/>
+          <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+          <p:inputText id="param2" value="#{calculatorBean.param2}" size="4"
+                                         styleClass="form-control" style="width: 100%"/>
+          </div>
+          </div>
+          <br/>
+          
+          <div id="main-buttons" class="hidden-sm hidden-xs">
+                    
+          <h:commandButton action="#{calculatorBean.add}" value="add" styleClass="btn-primary"/>
+          <p:spacer width="5"/>
+          <h:commandButton action="#{calculatorBean.substract}" value="substract" styleClass="btn-primary"/>
+          <p:spacer width="5"/>
+          <h:commandButton action="#{calculatorBean.multiply}" value="multiply" styleClass="btn-primary"/>
+          <p:spacer width="5"/>
+          <h:commandButton action="#{calculatorBean.divide}" value="divide" styleClass="btn-primary"/>
+          <p:spacer width="5"/>
+          <p:commandButton value="Credit Simulation" immediate="true"
+                                         action="simulation-list?faces-redirect=true"
+                                         process="@this"
+                                         icon="fa fa-calculator"
+                                         styleClass="btn-warning"/>
+          
+          </div>
+          
+          <p:spacer width="5"/>
+          <br/>
+          <br/>
+          <p:outputLabel for="result" value="Result :    "/>
+          <h:outputText id="result" value="#{calculatorBean.result}"/>
+          <br/>
+          <br/>
+          
+          </div>
+          </div>
+          
+        </h:form>
+        
+         <br/>     
+        <h3>Useful Formulas</h3>
+        
+        <div class="box box-primary">
+                <div class="box-header with-border">
+          
+          <p:outputLabel value="------------ TAEG = Taux Annuel Effectif Global"/>
+          <br/>
+          <p:outputLabel value="------------ Taux Périodique = TAEG / 12"/>
+          <br/>
+          <p:outputLabel value="------------ Total à Payer = Montant de la Mensualité * Nombre de Mois"/>
+          <br/>
+          <p:outputLabel value="------------ Montant des Intêrets = Total à Payer - Capital Emprunté"/>
+          
+          </div>
+          </div>
+
+</ui:define>
+</ui:composition>

@@ -5,33 +5,32 @@
                 template="#{layoutMB.template}">
 
     <ui:define name="title">
-        Respond to reports
-    </ui:define>
+Request a effectuer    </ui:define>
 
     <ui:define name="body">
         <f:metadata>
-            <f:viewParam name="id" value="#{reportFormMB.id}" converter="javax.faces.Long"/>
-            <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{reportFormMB.init()}"/>-->
-            <f:event type="preRenderView" listener="#{reportFormMB.init}"/>
+            <f:viewParam name="id" value="#{requestFormMB.id}" converter="javax.faces.Long"/>
+            <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{requestFormMB.init()}"/>-->
+            <f:event type="preRenderView" listener="#{requestFormMB.init}"/>
         </f:metadata>
 
-        <adm:breadcrumb title="#{empty reportFormMB.id ? 'New Car' : 'Car '.concat(reportFormMB.id)}" link="report-form.jsf?id=#{reportFormMB.id}"/>
+        <adm:breadcrumb title="#{empty requestFormMB.id ? 'New Car' : 'Car '.concat(requestFormMB.id)}" link="info-form.jsf?id=#{requestFormMB.id}"/>
         <h:form id="form" prependId="false">
-            <p:focus rendered="#{empty reportFormMB.id}"/>
+            <p:focus rendered="#{empty requestFormMB.id}"/>
 
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <div id="main-buttons" class="hidden-sm hidden-xs">
-                        <p:commandButton value="Save" action="#{reportFormMB.save}" update="@form"
+                        <p:commandButton value="Save" action="#{requestFormMB.save}" update="@form"
                                          icon="fa fa-check" styleClass="btn-primary"/>
-                        <p:spacer width="5" rendered="#{reportFormMB.isNew()}"/>
-                        <p:commandButton value="Clear" action="#{reportFormMB.clear}" process="@this"
+                        <p:spacer width="5" rendered="#{requestFormMB.isNew()}"/>
+                        <p:commandButton value="Clear" action="#{requestFormMB.clear}" process="@this"
                                          icon="fa fa-refresh" styleClass="btn-success"
-                                         update="@form" rendered="#{reportFormMB.isNew()}" resetValues="true"/>
-                        <p:spacer width="5" rendered="#{not reportFormMB.isNew()}"/>
+                                         update="@form" rendered="#{requestFormMB.isNew()}" resetValues="true"/>
+                        <p:spacer width="5" rendered="#{not requestFormMB.isNew()}"/>
 
-                        <p:commandButton value="Delete" action="#{reportFormMB.remove}" process="@this"
-                                         rendered="#{not reportFormMB.isNew()}" icon="fa fa-trash"
+                        <p:commandButton value="Delete" action="#{requestFormMB.remove}" process="@this"
+                                         rendered="#{not requestFormMB.isNew()}" icon="fa fa-trash"
                                          styleClass="btn-danger">
                             <f:setPropertyActionListener value="true"
                                                          target="#{facesContext.externalContext.flash.keepMessages}"/>
@@ -39,23 +38,23 @@
                         </p:commandButton>
                         <p:spacer width="5"/>
                         <p:commandButton value="Back" immediate="true"
-                                         action="report-list?faces-redirect=true"
+                                         action="request-list?faces-redirect=true"
                                          process="@this"
                                          icon="fa fa-reply"/>
                     </div>
-                    <p:splitButton value="Save" action="#{reportFormMB.save}" update="@form"
+                    <p:splitButton value="Save" action="#{requestFormMB.save}" update="@form"
                                    icon="fa fa-check"
                                    styleClass="hidden-md hidden-lg btn-primary">
-                        <p:menuitem value="Reset" action="#{reportFormMB.clear}"
-                                    process="@this" update="@form" rendered="#{reportFormMB.isNew()}"
+                        <p:menuitem value="Reset" action="#{requestFormMB.clear}"
+                                    process="@this" update="@form" rendered="#{requestFormMB.isNew()}"
                                     resetValues="true" icon="fa fa-refresh"/>
-                        <p:menuitem value="Delete" action="#{reportFormMB.remove}" process="@this"
-                                    rendered="#{not reportFormMB.isNew()}" icon="fa fa-trash"
+                        <p:menuitem value="Delete" action="#{requestFormMB.remove}" process="@this"
+                                    rendered="#{not requestFormMB.isNew()}" icon="fa fa-trash"
                                  >
                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
                         </p:menuitem>
                         <p:separator/>
-                        <p:menuitem value="Back" action="car-list?faces-redirect=true"
+                        <p:menuitem value="Back" action="info-list?faces-redirect=true"
                                     process="@this" immediate="true"
                                     icon="fa fa-reply"/>
                     </p:splitButton>
@@ -67,23 +66,36 @@
                             <p:outputLabel for="id" value="ID"/>
                         </div>
                         <div class="ui-sm-12 ui-md-4 ui-lg-5" >
-                            <p:outputLabel id="id" value="#{reportFormMB.car.id}" size="4"
+                            <p:inputText id="id" value="#{requestFormMB.car.id_request}" size="4"
                                          readonly="true" styleClass="form-control" style="width: 100%"/>
                         </div>
                         <div class="ui-sm-12 ui-md-2 ui-lg-1">
-                            <p:outputLabel value="Subject" for="inptModel"/>
+                            <p:outputLabel value="Email" for="inptEmail"/>
                         </div>
                         <div class="ui-sm-12 ui-md-4 ui-lg-5" >
-                            <p:outputLabel id="inptModel" value="#{reportFormMB.car.subject}"/>
+                            <p:inputText id="inptEmail" value="#{requestFormMB.car.email}"/>
                         </div>
                         <div class="ui-sm-12 ui-md-2 ui-lg-1">
-                            <p:outputLabel value="Mail content" for="inptName"/>
+                            <p:outputLabel value="Type" for="inptType"/>
                         </div>
                         <div class="ui-sm-12 ui-md-4 ui-lg-5" >
-                            <p:outputLabel id="inptName" value="#{reportFormMB.car.message}"/>
+                            <p:inputText id="inptType" value="#{requestFormMB.car.type}"/>
                         </div>
-                    
-                 
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="Status" for="inptStatus"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                            <p:inputNumber id="inptStatus" value="#{requestFormMB.car.status}"/>
+                        </div>
+                        
+                        <div class="ui-sm-12 ui-md-2 ui-lg-1">
+                            <p:outputLabel value="Exp_date" for="inptExp_date"/>
+                        </div>
+                        <div class="ui-sm-12 ui-md-4 ui-lg-5" >
+                        <p:calendar id="inptExp_date" beforeShowDay="false" pattern="dd/MM/yyyy" effect="drop" showButtonPanel="true" navigator="true" locale="pt" mindate="#{systemC.today}" value="#{requestFormMB.car.exp_date}"> 
+					    </p:calendar>
+                        </div>
+                    </div>
                 </div>
             </div>
 
