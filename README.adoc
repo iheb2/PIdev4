@@ -1,31 +1,8 @@
-
-
-# Content-Based-Movie-Recommender-System-with-sentiment-analysis-using-AJAX
-
-![Python](https://img.shields.io/badge/Python-3.8-blueviolet)
-![Framework](https://img.shields.io/badge/Framework-Flask-red)
-![Frontend](https://img.shields.io/badge/Frontend-HTML/CSS/JS-green)
-![API](https://img.shields.io/badge/API-TMDB-fcba03)
-
-
-
-
-
-
-
-
-
 # Web application for banking and microfinance
 
-![Python](https://img.shields.io/badge/Python-3.8-blueviolet)
-![Framework](https://img.shields.io/badge/Framework-Flask-red)
-![Frontend](https://img.shields.io/badge/Frontend-HTML/CSS/JS-green)
-![API](https://img.shields.io/badge/API-TMDB-fcba03)
+![alt text](https://github.com/iheb2/PIdev4/blob/main/Screenshot%202022-03-10%20102204.png)
 
-![Python](https://img.shields.io/badge/DATA-MINING-blueviolet)
-![Framework](https://img.shields.io/badge/Spring-Boot-red)
-![Frontend](https://img.shields.io/badge/Frontend-JSF-green)
-![Data-base](https://img.shields.io/badge/MySql-red)
+
 
 
 
