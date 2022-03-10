@@ -1,11 +1,11 @@
 # Online Bank With Frauds detection
+Nominated as one of the best projects in 2021 within our university Esprit
 
 ![Python](https://img.shields.io/badge/Data-Mining-blueviolet)
 ![Framework](https://img.shields.io/badge/Spring-Boot-red)
 ![Frontend](https://img.shields.io/badge/Frontend-JSF-green)
 ![Data-base](https://img.shields.io/badge/MySql-red)
 
-Nominated as one of the best projects in 2021 within our university Esprit
 
 
 
