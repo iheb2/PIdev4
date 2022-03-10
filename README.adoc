@@ -1,6 +1,6 @@
 # Web application for banking and microfinance
 
-![alt text](https://github.com/iheb2/PIdev4/blob/main/Screenshot%202022-03-10%20102204.png)
+![alt text](https://raw.githubusercontent.com/iheb2/PIdev4/main/Screenshot%202022-03-10%20102204.png)
 
 
 
