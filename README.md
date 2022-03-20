@@ -20,7 +20,8 @@ Nominated as one of the best projects in 2021 within our university Esprit
 ## 📝 Description
 -A 6-month academic group project :
 
-Developing a web application for banks and mcirofinance that allows customers to benefit from online banking services while limiting agent's intervention. Also , providing a dashboard, enabling administrators to view data and monitor the status of services..
+Developing a web application for Banks and Mcirofinance that allows customers to benefit from Online Banking services while limiting agent's intervention. Also , providing a dashboard, enabling administrators to view data and monitor the status of services.
+
 
 
 ## 📝 Architecture overview
