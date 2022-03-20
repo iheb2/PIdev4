@@ -29,13 +29,13 @@ The Web application: the actual application that is deployed on the Web server.
 
 The Web server: manages connections and client requests. It It also ensures the distribution of JSF and HTML pages.
 
-- The database: this is the component that handles the storage and management of data. management of data. Hibernate manages the persistence of data. Translated with www.DeepL.com/Translator (free version)
+- The database: this is the component that handles the storage and management of data. management of data. Hibernate manages the persistence of data. 
 
 ![alt text](https://github.com/iheb2/PIdev4/blob/main/archi2.png?raw=true)
 
 ## 📝 My tasks
 
-![alt text](https://github.com/iheb2/PIdev4/blob/main/Screenshot%202022-03-10%20102539.png?raw=true)
+![alt text](https://github.com/iheb2/PIdev4/blob/main/Screenshot%202022-03-20%20194151.png?raw=true)
 ![alt text](https://github.com/iheb2/PIdev4/blob/main/seq2.png?raw=true)
 
 
