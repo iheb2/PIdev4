@@ -1,4 +1,4 @@
-# Online Bank With Frauds detection
+# Web application for Banking and Microfinance
 Nominated as one of the best projects in 2021 within our university Esprit
 
 ![Python](https://img.shields.io/badge/Data-Mining-blueviolet)
@@ -18,7 +18,9 @@ Nominated as one of the best projects in 2021 within our university Esprit
 > ###   URL   : https://drive.google.com/file/d/1FB3EnQtrSBPimCO6o-beQxuLY2JnWKaD/view
 
 ## 📝 Description
--A 6-month academic group project to develop *********.
+-A 6-month academic group project :
+
+Developing a web application for banks and mcirofinance that allows customers to benefit from online banking services while limiting agent's intervention.Also , providing a dashboard, enabling administrators to view data and monitor the status of services..
 
 
 ## 📝 Architecture overview
